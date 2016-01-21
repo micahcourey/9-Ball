@@ -16,8 +16,8 @@ var StarsFrame = React.createClass({
 var ButtonFrame = React.createClass({
   render: function() {
     return (
-      <div>
-      ...
+      <div id="button-frame">
+       <button className="btn btn-primary btn-lg">=</button>
       </div>
     );
   }
@@ -26,8 +26,10 @@ var ButtonFrame = React.createClass({
 var AnswerFrame = React.createClass({
   render: function() {
     return (
-      <div>
-      ...
+      <div id="answer-frame">
+        <div className="well">
+          ...
+        </div>
       </div>
     );
   }
@@ -38,10 +40,12 @@ var Game = React.createClass({
     return (
       <div id="game">
         <h2>9 Ball</h2>
-        <StarsFrame />
-        <ButtonFrame />
-        <AnswerFrame />
-
+        <hr />
+        <div className="clearfix">
+          <StarsFrame />
+          <ButtonFrame />
+          <AnswerFrame />
+        </div>
       </div>
     );
   }
