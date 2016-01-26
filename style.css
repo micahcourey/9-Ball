@@ -43,30 +43,30 @@
 
 /**********  Pool Ball colors ***********/
 
-.number:nth-child(1) {
+.number:nth-child(1), #answer-frame .well span:nth-child(1) {
   background-color: yellow;
 }
-.number:nth-child(2) {
+.number:nth-child(2), #answer-frame .well span:nth-child(2) {
   background-color: blue;
 }
-.number:nth-child(3) {
+.number:nth-child(3), #answer-frame .well span:nth-child(3) {
   background-color: red;
 }
-.number:nth-child(4) {
+.number:nth-child(4), #answer-frame .well span:nth-child(4) {
   background-color: purple;
 }
-.number:nth-child(5) {
+.number:nth-child(5), #answer-frame .well span:nth-child(5) {
   background-color: orange;
 }
-.number:nth-child(6) {
+.number:nth-child(6), #answer-frame .well span:nth-child(6) {
   background-color: green;
 }
-.number:nth-child(7) {
+.number:nth-child(7), #answer-frame .well span:nth-child(7) {
   background-color: darkred;
 }
-.number:nth-child(8) {
+.number:nth-child(8), #answer-frame .well span:nth-child(8) {
   background-color: black;
 }
-.number:nth-child(9) {
+.number:nth-child(9), #answer-frame .well span:nth-child(9) {
   background-color: orange;
 }
