@@ -19,9 +19,13 @@ var StarsFrame = React.createClass({
 
 var ButtonFrame = React.createClass({
   render: function() {
+    var disabled;
+    disabled = (this.props.selectedNumbers.length === 0);
     return (
       <div id="button-frame">
-       <button className="btn btn-primary">=</button>
+       <button className="btn btn-primary" disabled={disabled}>
+        =
+       </button>
       </div>
     );
   }
@@ -87,23 +91,25 @@ var Game = React.createClass({
   },
   unselectNumber: function(clickedNumber) {
     var selectedNumbers = this.state.selectedNumbers,
-      indexOfNumber = selectedNumbers.indexOf(clickedNumber);
+          indexOfNumber = selectedNumbers.indexOf(clickedNumber);
 
     selectedNumbers.splice(indexOfNumber, 1);
     this.setState({selectedNumbers: selectedNumbers});
   },
   render: function() {
+    var selectedNumbers = this.state.selectedNumbers,
+          numberOfStars = this.state.numberOfStars;
     return (
       <div id="game">
         <h2>9 Ball</h2>
         <div className="clearfix">
-          <StarsFrame numberOfStars = {this.state.numberOfStars} />
-          <ButtonFrame />
-          <AnswerFrame selectedNumbers = {this.state.selectedNumbers}
+          <StarsFrame numberOfStars = {numberOfStars} />
+          <ButtonFrame selectedNumbers = {selectedNumbers} />
+          <AnswerFrame selectedNumbers = {selectedNumbers}
                         unselectNumber = {this.unselectNumber} />
         </div>
 
-        <NumbersFrame selectedNumbers = {this.state.selectedNumbers}
+        <NumbersFrame selectedNumbers = {selectedNumbers}
                          selectNumber = {this.selectNumber} />
 
       </div>
