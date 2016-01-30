@@ -24,7 +24,7 @@ var ButtonFrame = React.createClass({
     switch(correct) {
       case true:
          button = (
-          <button className="btn btn-success btn-lg">
+          <button className="btn btn-success btn-lg" onClick = {this.props.acceptAnswer}>
             <span className="glyphicon glyphicon-ok"></span>
           </button>
         );
@@ -80,10 +80,12 @@ var NumbersFrame = React.createClass({
 
     var numbers = [], className,
         selectNumber = this.props.selectNumber,
+        usedNumbers = this.props.usedNumbers,
         selectedNumbers = this.props.selectedNumbers;
 
     for (var i=1; i <= 9; i++) {
       className = "number selected-" + (selectedNumbers.indexOf(i)>=0);
+      className += " used-" + (usedNumbers.indexOf(i)>=0);
       numbers.push(
         <div className={className} onClick={selectNumber.bind(null, i)}>
           {i}
@@ -104,13 +106,14 @@ var Game = React.createClass({
   getInitialState: function() {
     return {numberOfStars: Math.floor(Math.random()*9) + 1,
             selectedNumbers: [],
+            usedNumbers: [],
             correct: null
     };
   },
   selectNumber: function(clickedNumber) {
     if (this.state.selectedNumbers.indexOf(clickedNumber) < 0) {
       this.setState(
-      {selectedNumbers: this.state.selectedNumbers.concat(clickedNumber)}
+      {selectedNumbers: this.state.selectedNumbers.concat(clickedNumber), correct: null }
       );
     }
   },
@@ -119,7 +122,7 @@ var Game = React.createClass({
           indexOfNumber = selectedNumbers.indexOf(clickedNumber);
 
     selectedNumbers.splice(indexOfNumber, 1);
-    this.setState({selectedNumbers: selectedNumbers});
+    this.setState({selectedNumbers: selectedNumbers, correct: null });
   },
   sumOfSelectedNumbers: function() {
     return this.state.selectedNumbers.reduce(function(p,n) {
@@ -130,8 +133,18 @@ var Game = React.createClass({
     var correct = (this.state.numberOfStars === this.sumOfSelectedNumbers());
     this.setState({correct: correct});
   },
+  acceptAnswer: function() {
+    var usedNumbers = this.state.usedNumbers.concat(this.state.selectedNumbers);
+    this.setState({
+      selectedNumbers: [],
+      usedNumbers: usedNumbers,
+      correct: null,
+      numberOfStars: Math.floor(Math.random()*9) + 1
+    })
+  },
   render: function() {
     var selectedNumbers = this.state.selectedNumbers,
+        usedNumbers = this.state.usedNumbers,
         numberOfStars = this.state.numberOfStars;
         correct = this.state.correct;
     return (
@@ -140,14 +153,16 @@ var Game = React.createClass({
         <div className="clearfix">
           <StarsFrame numberOfStars = {numberOfStars} />
           <ButtonFrame selectedNumbers = {selectedNumbers}
-                               correct = {correct}
-                               checkAnswer={this.checkAnswer} />
+                       correct = {correct}
+                       checkAnswer = {this.checkAnswer}
+                       acceptAnswer = {this.acceptAnswer} />
           <AnswerFrame selectedNumbers = {selectedNumbers}
                         unselectNumber = {this.unselectNumber} />
         </div>
 
         <NumbersFrame selectedNumbers = {selectedNumbers}
-                         selectNumber = {this.selectNumber} />
+                      usedNumbers = {usedNumbers}
+                      selectNumber = {this.selectNumber} />
 
       </div>
     );

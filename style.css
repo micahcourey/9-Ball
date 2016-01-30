@@ -41,6 +41,13 @@
   cursor: not-allowed;
 }
 
+
+#numbers-frame .used-true {
+  background-color: #aaddaa;
+  color: #99bb99;
+  cursor: not-allowed;
+}
+
 /**********  Pool Ball colors ***********/
 
 .number:nth-child(1), #answer-frame .well span:nth-child(1) {
