@@ -50,8 +50,11 @@ var ButtonFrame = React.createClass({
       <div id="button-frame">
         {button}
         <br /><br />
-        <button className="btn btn-warning btn-xs" onClick={this.props.redraw}>
+        <button className="btn btn-warning btn-xs" onClick={this.props.redraw}
+                disabled={this.props.redraws === 0}>
           <span className="glyphicon glyphicon-refresh"></span>
+          &nbsp;
+          {this.props.redraws}
         </button>
       </div>
     );
@@ -111,6 +114,7 @@ var Game = React.createClass({
     return {numberOfStars: Math.floor(Math.random()*9) + 1,
             selectedNumbers: [],
             usedNumbers: [],
+            redraws: 5,
             correct: null
     };
   },
@@ -147,16 +151,20 @@ var Game = React.createClass({
     })
   },
   redraw: function() {
-    this.setState({
-      numberOfStars: Math.floor(Math.random()*9) + 1,
-      correct: null,
-      selectedNumbers: []
-    });
+    if (this.state.redraws > 0) {
+      this.setState({
+        numberOfStars: Math.floor(Math.random()*9) + 1,
+        correct: null,
+        selectedNumbers: [],
+        redraws: this.state.redraws -1
+      });
+    }
   },
   render: function() {
     var selectedNumbers = this.state.selectedNumbers,
         usedNumbers = this.state.usedNumbers,
-        numberOfStars = this.state.numberOfStars;
+        numberOfStars = this.state.numberOfStars,
+        redraws = this.state.redraws,
         correct = this.state.correct;
     return (
       <div id="game">
@@ -165,6 +173,7 @@ var Game = React.createClass({
           <StarsFrame numberOfStars = {numberOfStars} />
           <ButtonFrame selectedNumbers = {selectedNumbers}
                        correct = {correct}
+                       redraws = {redraws}
                        checkAnswer = {this.checkAnswer}
                        acceptAnswer = {this.acceptAnswer}
                        redraw={this.redraw} />
