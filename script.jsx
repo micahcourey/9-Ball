@@ -109,14 +109,28 @@ var NumbersFrame = React.createClass({
   }
 });
 
+var DoneFrame = React.createClass({
+  render: function() {
+    return (
+      <div className="well text-center">
+        <h2>{this.props.doneStatus}</h2>
+      </div>
+    );
+  }
+});
+
 var Game = React.createClass({
   getInitialState: function() {
-    return {numberOfStars: Math.floor(Math.random()*9) + 1,
+    return {numberOfStars: this.randomNumber(),
             selectedNumbers: [],
             usedNumbers: [],
             redraws: 5,
-            correct: null
+            correct: null,
+            doneStatus: null
     };
+  },
+  randomNumber: function() {
+    return Math.floor(Math.random()*9) + 1
   },
   selectNumber: function(clickedNumber) {
     if (this.state.selectedNumbers.indexOf(clickedNumber) < 0) {
@@ -147,13 +161,13 @@ var Game = React.createClass({
       selectedNumbers: [],
       usedNumbers: usedNumbers,
       correct: null,
-      numberOfStars: Math.floor(Math.random()*9) + 1
+      numberOfStars: this.randomNumber()
     })
   },
   redraw: function() {
     if (this.state.redraws > 0) {
       this.setState({
-        numberOfStars: Math.floor(Math.random()*9) + 1,
+        numberOfStars: this.randomNumber(),
         correct: null,
         selectedNumbers: [],
         redraws: this.state.redraws -1
@@ -165,25 +179,33 @@ var Game = React.createClass({
         usedNumbers = this.state.usedNumbers,
         numberOfStars = this.state.numberOfStars,
         redraws = this.state.redraws,
-        correct = this.state.correct;
+        correct = this.state.correct,
+        doneStatus = this.state.doneStatus,
+        bottomFrame;
+
+    if (doneStatus) {
+      bottomFrame = <DoneFrame doneStatus={doneStatus} />;
+    } else {
+      bottomFrame = <NumbersFrame selectedNumbers={selectedNumbers}
+                     usedNumbers={usedNumbers}
+                     selectNumber={this.selectNumber} />;
+    }
     return (
       <div id="game">
         <h2>9 Ball</h2>
         <div className="clearfix">
-          <StarsFrame numberOfStars = {numberOfStars} />
-          <ButtonFrame selectedNumbers = {selectedNumbers}
-                       correct = {correct}
-                       redraws = {redraws}
-                       checkAnswer = {this.checkAnswer}
-                       acceptAnswer = {this.acceptAnswer}
+          <StarsFrame numberOfStars={numberOfStars} />
+          <ButtonFrame selectedNumbers={selectedNumbers}
+                       correct={correct}
+                       redraws={redraws}
+                       checkAnswer={this.checkAnswer}
+                       acceptAnswer={this.acceptAnswer}
                        redraw={this.redraw} />
-          <AnswerFrame selectedNumbers = {selectedNumbers}
-                        unselectNumber = {this.unselectNumber} />
+          <AnswerFrame selectedNumbers={selectedNumbers}
+                       unselectNumber={this.unselectNumber} />
         </div>
 
-        <NumbersFrame selectedNumbers = {selectedNumbers}
-                      usedNumbers = {usedNumbers}
-                      selectNumber = {this.selectNumber} />
+        {bottomFrame}
 
       </div>
     );
