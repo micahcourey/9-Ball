@@ -23,10 +23,10 @@
   display: inline-block;
   margin: 0.5em;
   /* background-color: #bbb; */
-  width: 30px;
+  width: 45px;
   text-align: center;
   color: #fff;
-  font-size: 22px;
+  font-size: 33px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -41,32 +41,39 @@
   cursor: not-allowed;
 }
 
+
+#numbers-frame .used-true {
+  background-color: #aaddaa;
+  color: #99bb99;
+  cursor: not-allowed;
+}
+
 /**********  Pool Ball colors ***********/
 
 .number:nth-child(1) {
-  background-color: yellow;
+  background-color: #f5f615;
 }
 .number:nth-child(2) {
-  background-color: blue;
+  background-color: #025aa4;
 }
 .number:nth-child(3) {
-  background-color: red;
+  background-color: #ca2631;
 }
 .number:nth-child(4) {
-  background-color: purple;
+  background-color: #594094;
 }
 .number:nth-child(5) {
-  background-color: orange;
+  background-color: #ef7627;
 }
 .number:nth-child(6) {
-  background-color: green;
+  background-color: #066d5a;
 }
 .number:nth-child(7) {
-  background-color: darkred;
+  background-color: #8d232d;
 }
 .number:nth-child(8) {
-  background-color: black;
+  background-color: #000;
 }
 .number:nth-child(9) {
-  background-color: orange;
+  background-color: #ef7627;
 }
