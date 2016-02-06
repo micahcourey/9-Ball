@@ -1,0 +1,79 @@
+#stars-frame .glyphicon {
+  margin: 0.3em;
+  font-size: 1.75em;
+}
+
+#stars-frame, #answer-frame {
+  width: 40%;
+  float: left;
+}
+
+#button-frame {
+  width: 20%;
+  float: left;
+  text-align: center;
+  margin-top: 70px;
+}
+
+#stars-frame .well, #answer-frame .well {
+  height: 200px;
+}
+
+#numbers-frame .number, #answer-frame .well span {
+  display: inline-block;
+  margin: 0.5em;
+  /* background-color: #bbb; */
+  width: 30px;
+  text-align: center;
+  color: #fff;
+  font-size: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#answer-frame .well span {
+  background-color: #bbb;
+}
+
+#numbers-frame .selected-true {
+  background-color: #e8e8e8;
+  color: #ddd;
+  cursor: not-allowed;
+}
+
+
+#numbers-frame .used-true {
+  background-color: #aaddaa;
+  color: #99bb99;
+  cursor: not-allowed;
+}
+
+/**********  Pool Ball colors ***********/
+
+.number:nth-child(1) {
+  background-color: #f5f615;
+}
+.number:nth-child(2) {
+  background-color: #025aa4;
+}
+.number:nth-child(3) {
+  background-color: #ca2631;
+}
+.number:nth-child(4) {
+  background-color: #594094;
+}
+.number:nth-child(5) {
+  background-color: #ef7627;
+}
+.number:nth-child(6) {
+  background-color: #066d5a;
+}
+.number:nth-child(7) {
+  background-color: #8d232d;
+}
+.number:nth-child(8) {
+  background-color: #000;
+}
+.number:nth-child(9) {
+  background-color: #ef7627;
+}
